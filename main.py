@@ -11,7 +11,8 @@ screen.tracer(0)
 figure = Figure()
 
 screen.listen()
-screen.onkey(figure.move, "Up")
+screen.onkeypress(figure.start_move, "Up")
+screen.onkeyrelease(figure.end_move, "Up")
 
 game_is_on = True
 
@@ -26,6 +27,8 @@ screen.onkey(end_game, "Escape")
 while game_is_on:
     screen.update()
     time.sleep(0.01)
+
+    figure.update_position()
 
     # detect when figure has reached finish
     if figure.ycor() > 260:
