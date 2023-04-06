@@ -1,6 +1,9 @@
 from turtle import Turtle
 import colors
 
+STARTING_POSITION = (0, -260)
+MOVE_INCREMENTAL = 5
+
 
 class Figure(Turtle):
     def __init__(self):
@@ -12,7 +15,7 @@ class Figure(Turtle):
         self.should_move = 0
 
     def reset_position(self):
-        self.goto(0, -260)
+        self.goto(STARTING_POSITION)
 
     def start_move(self):
         self.should_move = 1
@@ -22,4 +25,4 @@ class Figure(Turtle):
 
     def update_position(self):
         y_position = self.ycor()
-        self.setposition(0, y_position + 5 * self.should_move)
+        self.setposition(0, y_position + MOVE_INCREMENTAL * self.should_move)

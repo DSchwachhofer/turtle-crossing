@@ -6,36 +6,38 @@ from startscreen import Start_Screen
 import colors
 import time
 
+# set up screen
 screen = Screen()
 screen.setup(width=600, height=600)
 screen.bgcolor(colors.bg)
-screen.tracer(0)
+screen.tracer(0)  # prevent screen from auto updating
 
+# create start screen
 start_screen = Start_Screen()
 screen.update()
 
+figure = Figure()  # create play figure
+blocks = Blocks()  # create moving blocks
+level = Level()  # create level management
+
 screen.listen()
 
-figure = Figure()
-blocks = Blocks()
-level = Level()
-
-screen.onkeypress(figure.start_move, "Up")
-screen.onkeyrelease(figure.end_move, "Up")
+screen.onkeypress(figure.start_move, "Up")  # figure starts moving
+screen.onkeyrelease(figure.end_move, "Up")  # figure stops moving
 
 game_is_on = False
 
 
 def start_game():
     global game_is_on
-    if not game_is_on:
-        figure.showturtle()
-        start_screen.clear()
+    if not game_is_on:  # prevent any of those actions if space is pressed while game is running
         game_is_on = True
-        figure.reset_position()
-        level.level = 0
-        level.update_level()
-        blocks.init_blocks()
+        figure.showturtle()  # show play figure again
+        figure.reset_position()  # reset position of play figure
+        start_screen.clear()  # clear start or game over screen
+        blocks.init_blocks()  # create new blocks
+        level.level = 1  # reset level
+        level.update_level()  # write initial level
 
         while game_is_on:
             screen.update()
@@ -52,6 +54,7 @@ def start_game():
 
             # detect collision with blocks
             if blocks.check_collision(figure.ycor()):
+                # wait 1.5 seconds, clear game screen, show game over screen and high score
                 game_is_on = False
                 time.sleep(1.5)
                 blocks.clear_blocks()
