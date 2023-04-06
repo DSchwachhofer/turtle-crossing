@@ -13,6 +13,7 @@ class Block(Turtle):
         self.init_block()
 
     def init_block(self):
+        self.showturtle()
         self.setposition(random.randint(-300, 600), random.randint(-200, 230))
 
     def reset(self):

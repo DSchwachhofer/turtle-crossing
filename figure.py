@@ -10,7 +10,6 @@ class Figure(Turtle):
         self.shape("turtle")
         self.setheading(90)
         self.should_move = 0
-        self.reset_position()
 
     def reset_position(self):
         self.goto(0, -260)
